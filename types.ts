@@ -6,6 +6,7 @@ export type Product = {
   isFeatured: boolean;
   size: Size;
   color: Color;
+  description: string;
   images: Image[];
 };
 

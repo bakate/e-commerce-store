@@ -22,7 +22,7 @@ const Currency = ({ value }: CurrencyProps) => {
     return null;
   }
   return (
-    <span className="font-semibold dark:text-gray-800">
+    <span className="font-semibold text-gray-900 dark:text-gray-100">
       {formatter.format(value)}
     </span>
   );

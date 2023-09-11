@@ -21,12 +21,12 @@ const NavBarActions = () => {
     return null;
   }
   return (
-    <div className="ml-auto flex items-center gap-x-4">
+    <div className="ml-auto flex items-center">
       <ModeToggle />
       <Button
         variant={"ghost"}
         onClick={() => router.push("/cart")}
-        className="flex items-center px-5 py-2 relative"
+        className="flex items-center pr-5 pl-2 py-2 relative"
       >
         <ShoppingBasket size={"icon"} />
         <span className="ml-3 text-sm font-bold absolute top-1 right-1 rounded-full px-1 bg-red-500 text-white center self-center">
