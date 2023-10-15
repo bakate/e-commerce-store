@@ -4,8 +4,8 @@ export type Product = {
   name: string;
   price: string;
   isFeatured: boolean;
-  size: Size;
-  color: Color;
+  sizes: Size[];
+  inventory: number;
   description: string;
   images: Image[];
 };
@@ -19,6 +19,9 @@ export type Billboard = {
   id: string;
   label: string;
   imageUrl: string;
+  store: {
+    name: string;
+  };
 };
 
 export type Category = {
@@ -28,12 +31,6 @@ export type Category = {
 };
 
 export type Size = {
-  id: string;
-  name: string;
-  value: string;
-};
-
-export type Color = {
   id: string;
   name: string;
   value: string;

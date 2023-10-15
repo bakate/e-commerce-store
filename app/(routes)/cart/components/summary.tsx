@@ -40,7 +40,6 @@ const Summary = () => {
         }),
       })
     ).json();
-    console.log(response);
 
     window.location = response.url;
   };

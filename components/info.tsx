@@ -1,24 +1,27 @@
 "use client";
 
 import { ShoppingCart } from "lucide-react";
-import { toast } from "react-hot-toast";
 
 import Currency from "@/components/currency";
 import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/use-cart";
+import { cn } from "@/lib/utils";
 import { Product } from "@/types";
-// import useCart from "@/hooks/use-cart";
+import { useState } from "react";
+import { Badge } from "./ui/badge";
 
 interface InfoProps {
   data: Product;
+  onItemAdded?: () => void;
 }
 
-const Info: React.FC<InfoProps> = ({ data }) => {
+const Info: React.FC<InfoProps> = ({ data, onItemAdded }) => {
   const cart = useCart();
+  const [selectedSize, setSelectedSize] = useState(data.sizes);
 
   const onAddToCart = () => {
-    cart.addItem(data);
-    toast.success("Product added to cart");
+    cart.addItem({ ...data, sizes: selectedSize });
+    onItemAdded?.();
   };
   return (
     <div>
@@ -28,29 +31,40 @@ const Info: React.FC<InfoProps> = ({ data }) => {
       <p className="text-sm text-gray-700 dark:text-gray-100">
         {data.description}
       </p>
-      <div className="mt-3 flex items-end justify-between ">
+      <div className="mt-3 flex items-center">
+        <h3 className="font-semibold text-black dark:text-gray-100 mr-2">
+          Price:
+        </h3>
         <p className="text-2xl text-gray-900">
           <Currency value={+data?.price} />
         </p>
       </div>
       <hr className="my-4" />
       <div className="flex flex-col gap-y-6">
-        <div className="flex items-center gap-x-4">
+        <div className="flex items-center gap-2 flex-wrap">
           <h3 className="font-semibold text-black dark:text-gray-100">Size:</h3>
-          <div>{data?.size?.value}</div>
-        </div>
-        <div className="flex items-center gap-x-4">
-          <h3 className="font-semibold text-black dark:text-gray-100">
-            Color:
-          </h3>
-          <div
-            className="h-6 w-6 rounded-full border border-gray-600"
-            style={{ backgroundColor: data?.color?.value }}
-          />
+          {data.sizes.map((size) => (
+            <Badge
+              key={size.value}
+              className={cn(
+                "cursor-pointer mr-1 bg-gray-900 text-white",
+                size.id === selectedSize[0].id && "bg-gray-200 text-black"
+              )}
+              onClick={() => {
+                setSelectedSize([size]);
+              }}
+            >
+              {size.name}
+            </Badge>
+          ))}
         </div>
       </div>
       <div className="mt-10 flex items-center gap-x-3">
-        <Button onClick={onAddToCart} className="flex items-center gap-x-2">
+        <Button
+          onClick={onAddToCart}
+          className="flex items-center gap-x-2"
+          disabled={selectedSize.length !== 1}
+        >
           Add To Cart
           <ShoppingCart size={20} />
         </Button>

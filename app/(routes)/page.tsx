@@ -6,9 +6,11 @@ import Container from "@/components/ui/container";
 import { Suspense } from "react";
 import Loading from "./loading";
 
+const currentBillboardId = `${process.env.NEXT_PUBLIC_BILLBOARD_ID}`;
+
 export default async function Home() {
   const products = await getProducts({ isFeatured: true });
-  const billboard = await getBillboardById("64f35a96ff7189d58e026534");
+  const billboard = await getBillboardById(currentBillboardId);
 
   return (
     <Suspense fallback={<Loading />}>

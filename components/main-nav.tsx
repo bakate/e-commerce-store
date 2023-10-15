@@ -20,13 +20,13 @@ const MainNav = ({ data }: MainNavProps) => {
   }));
 
   return (
-    <nav className="mx-6 flex items-center space-x-4 lg:space-x-6">
+    <nav className="mx-3 flex items-center justify-between lg:space-x-6">
       {routes.map((route) => (
         <Link
           key={route.href}
           href={route.href}
           className={cn(
-            "text-lg font-medium transition-colors hover:text-black hover:dark:text-white",
+            "text-lg font-medium transition-colors hover:text-black hover:dark:text-white ",
             route.active
               ? "text-black dark:text-gray-100 dark:font-bold"
               : "text-gray-500 dark:text-gray-100 dark:font-normal"

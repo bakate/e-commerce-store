@@ -5,10 +5,10 @@ import qs from "query-string";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Color, Size } from "@/types";
+import { Size } from "@/types";
 
 interface FilterProps {
-  data: (Size | Color)[];
+  data: Size[];
   name: string;
   valueKey: string;
 }
