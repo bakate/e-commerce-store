@@ -2,11 +2,10 @@
 
 import Currency from "@/components/currency";
 import { Button } from "@/components/ui/button";
-import useCart from "@/hooks/use-cart";
 import usePreviewModal from "@/hooks/use-preview-modal";
 import { cn } from "@/lib/utils";
 import { Product } from "@/types";
-import { Expand, ShoppingCart } from "lucide-react";
+import { Expand } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { MouseEventHandler } from "react";
@@ -16,12 +15,6 @@ type ProductCardProps = {
 };
 const ProductCard = ({ product }: ProductCardProps) => {
   const router = useRouter();
-  const cart = useCart();
-
-  const onAddToCart: MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.stopPropagation();
-    cart.addItem(product);
-  };
 
   const handleClick = () => {
     router.push(`/product/${product?.id}`);
@@ -56,9 +49,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
           >
             <Button variant="outline" size="icon" onClick={onPreview}>
               <Expand size={20} />
-            </Button>
-            <Button variant="outline" size="icon" onClick={onAddToCart}>
-              <ShoppingCart size={20} />
             </Button>
           </div>
         </div>

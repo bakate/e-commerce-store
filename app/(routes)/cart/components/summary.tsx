@@ -25,7 +25,7 @@ const Summary = () => {
   }, [searchParams, removeAll]);
 
   const totalPrice = items.reduce((total, item) => {
-    return total + Number(item.price);
+    return total + Number(item.price) * (item.quantity ? item.quantity : 1);
   }, 0);
 
   const onCheckout = async () => {
@@ -36,7 +36,10 @@ const Summary = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          productIds: items.map((item) => item.id),
+          products: items.map((item) => ({
+            id: item.id,
+            quantity: item.quantity,
+          })),
         }),
       })
     ).json();

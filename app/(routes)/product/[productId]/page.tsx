@@ -16,7 +16,7 @@ const Product = async ({ params: { productId } }: ProductPageProps) => {
 
   const suggestedProducts = await getProducts({
     categoryId: product?.category?.id,
-  });
+  }).then((res) => res?.filter((p) => p.id !== product.id));
 
   if (!product) {
     return null;
@@ -32,7 +32,9 @@ const Product = async ({ params: { productId } }: ProductPageProps) => {
             </div>
           </div>
           <hr className="my-10" />
-          <ProductList title="Related Items" products={suggestedProducts} />
+          {suggestedProducts.length ? (
+            <ProductList title="Related Items" products={suggestedProducts} />
+          ) : null}
         </div>
       </Container>
     </div>

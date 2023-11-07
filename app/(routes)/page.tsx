@@ -10,6 +10,8 @@ const currentBillboardId = `${process.env.NEXT_PUBLIC_BILLBOARD_ID}`;
 
 export default async function Home() {
   const products = await getProducts({ isFeatured: true });
+  console.log(JSON.stringify(products, null, 2));
+
   const billboard = await getBillboardById(currentBillboardId);
 
   return (

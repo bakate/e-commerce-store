@@ -8,6 +8,7 @@ export type Product = {
   inventory: number;
   description: string;
   images: Image[];
+  quantity: number;
 };
 
 export type Image = {
